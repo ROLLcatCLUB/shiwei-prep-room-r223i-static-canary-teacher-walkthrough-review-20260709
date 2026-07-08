@@ -1,0 +1,52 @@
+{
+  "url": "http://127.0.0.1:8793/R223H_static_canary_prototype.html",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "screenshot": "D:/Documents/SmartEdu/xiaobei-core/outputs/PREP_ROOM_RENDER_CANVAS_DEEPEN_V1/1013R_R223H_FIXTURE_ONLY_STATIC_CANARY_PROTOTYPE/R223H_static_canary_screenshot.png",
+  "screenshotBytes": 122105,
+  "initial": {
+    "bindingPolicy": "selected_component_only",
+    "bodyClientWidth": 1265,
+    "bodyScrollWidth": 1265,
+    "currentMode": "daily",
+    "dailyCards": 3,
+    "fixtureOnly": "true",
+    "forbiddenText": [],
+    "formalApply": "false",
+    "frontendBackendModified": "false",
+    "guardedSlots": "binding_preview_slot source_risk_slot quick_projection_slot",
+    "highRiskVisible": true,
+    "independentStaticHtml": "true",
+    "lessonBodyWriteback": "false",
+    "localNoteNonChat": "true",
+    "localNotePersistence": "none",
+    "localNoteScope": "current_section_only",
+    "noChatComposer": "true",
+    "noGlobalShelf": "true",
+    "providerModelPromptDb": "false",
+    "r97bModified": "false",
+    "requiredSlots": "mode_switch_slot prep_canvas_slot focused_section_slot component_suggestion_slot local_note_slot",
+    "runtimeEnabled": "false",
+    "selectedBinding": "material_mystery_box",
+    "sourceRiskPolicy": "readonly_high_risk_hint_only",
+    "stage": "R223H"
+  },
+  "quick": {
+    "componentLabel": "当前环节组件建议 · 2 / 2",
+    "currentMode": "quick",
+    "dailyPanelHidden": true,
+    "quickCards": 2,
+    "quickPanelVisible": true
+  },
+  "focus": {
+    "bindingEvidence": "步骤核对或错误修正",
+    "bindingTitle": "技法拆解",
+    "selectedBinding": "technique_step_demo"
+  },
+  "note": {
+    "noteState": "已暂存到本页内存 · 不写回教案"
+  },
+  "passed": true
+}

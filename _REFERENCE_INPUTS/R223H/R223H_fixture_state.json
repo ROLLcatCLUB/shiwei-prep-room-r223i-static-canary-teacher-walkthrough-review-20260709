@@ -1,0 +1,161 @@
+{
+  "stage_id": "1013R_R223H_FIXTURE_ONLY_STATIC_CANARY_PROTOTYPE",
+  "status": "fixture_only_static_canary",
+  "boundary": {
+    "formal_ui": false,
+    "r97b_modified": false,
+    "r97b_formal_route": false,
+    "frontend_backend_modified": false,
+    "runtime_enabled": false,
+    "provider_model_prompt_db": false,
+    "database_enabled": false,
+    "lesson_body_writeback": false,
+    "real_component_execution": false,
+    "formal_apply": false,
+    "r224_started": false
+  },
+  "fixture_sources": {
+    "slot_contract": "_REFERENCE_INPUTS/R223F/R223F_render_slot_state_model.json",
+    "visual_mock_state": "_REFERENCE_INPUTS/R223E/R223E_static_visual_mock_state.json",
+    "daily_sample": "_REFERENCE_INPUTS/R222C/R222C_daily_prep_polished_samples.md",
+    "quick_sample": "_REFERENCE_INPUTS/R222C/R222C_quick_prep_polished_samples.md",
+    "component_cards": "_REFERENCE_INPUTS/R222D_P1/R222D_P1_hardened_fixture_component_cards.json"
+  },
+  "canary_shape": {
+    "independent_static_html": true,
+    "sandbox_page": true,
+    "fixture_only_state": true,
+    "local_in_memory_interaction": true,
+    "screenshot_smoke_required": true,
+    "validator_required": true,
+    "review_zip_required": true
+  },
+  "admitted_slots": {
+    "mode_switch_slot": {
+      "slot_id": "prep_workbench.mode_switch_slot",
+      "status": "present",
+      "mode_source": "fixture_only"
+    },
+    "prep_canvas_slot": {
+      "slot_id": "prep_workbench.prep_canvas_slot",
+      "status": "present",
+      "priority": "primary_reading_object"
+    },
+    "focused_section_slot": {
+      "slot_id": "prep_workbench.focused_section_slot",
+      "status": "present",
+      "section_title": "材料与印痕探究"
+    },
+    "component_suggestion_slot": {
+      "slot_id": "prep_workbench.component_suggestion_slot",
+      "status": "present",
+      "daily_max": 3,
+      "quick_max": 2,
+      "scope": "current_focused_section_only"
+    },
+    "local_note_slot": {
+      "slot_id": "prep_workbench.local_note_slot",
+      "status": "present",
+      "scope": "current_section_only",
+      "persistence": "none"
+    },
+    "binding_preview_slot": {
+      "slot_id": "prep_workbench.binding_preview_slot",
+      "status": "present_with_guard",
+      "open_policy": "selected_component_only"
+    },
+    "source_risk_slot": {
+      "slot_id": "prep_workbench.source_risk_slot",
+      "status": "readonly_high_risk_hint_only",
+      "ordinary_gaps": "folded"
+    },
+    "quick_projection_slot": {
+      "slot_id": "prep_workbench.quick_projection_slot",
+      "status": "static_variant_only",
+      "readability_target": "3_minute_readable"
+    }
+  },
+  "lesson_fixture": {
+    "lesson_title": "有趣的纸印",
+    "grade": "三年级",
+    "mode_default": "daily",
+    "type_guard": "不能变成普通纸手工；必须保留纸材特性、印痕语言、关键印法或过程证据。",
+    "high_risk_confirmation": "未确认学校可用油墨、滚筒或替代材料；先按拓印/单色试印保底。",
+    "focused_section": {
+      "title": "材料与印痕探究",
+      "teacher_action": "引导学生摸一摸不同纸材，再用同一方法试印，观察印痕差异。",
+      "student_action": "摸材料、试印一次，圈出最清楚或最有层次的印痕。",
+      "material_need": "不同纸材、拓印或滚印工具、颜料或油墨、试印纸、清洁材料。",
+      "evidence_bottom_line": "至少保留一条试印记录，能说出纸材、印法或印痕效果。"
+    },
+    "daily_projection": {
+      "time_rhythm": [
+        {"time": "4 分钟", "step": "摸纸材", "organization": "两人一组比较厚薄、软硬、肌理"},
+        {"time": "6 分钟", "step": "看示范", "organization": "教师示范拓印；有条件时补滚印"},
+        {"time": "10 分钟", "step": "试印记录", "organization": "个人试印，小组互看印痕"},
+        {"time": "14 分钟", "step": "完成纸印", "organization": "个人制作，小组共享工具"},
+        {"time": "4 分钟", "step": "展示说印痕", "organization": "选 2-3 件说纸材和印法"}
+      ],
+      "screen_prompt": "纸材：厚/薄/软/硬/有肌理；印痕：清楚/模糊/有层次/有重复。",
+      "learning_sheet": "我用的纸：____；我用的印法：____；最清楚的一次是第 __ 次，因为：____。"
+    },
+    "quick_projection": {
+      "steps": [
+        "摸：比较纸材厚薄、软硬和肌理。",
+        "试：用一种方法试印并观察印痕。",
+        "做：选择纸材完成小幅纸印。",
+        "说：说出纸材、印法和效果。",
+        "清：按小组分工整理工具。"
+      ],
+      "evidence_bottom_line": "至少保留一条试印记录。"
+    }
+  },
+  "component_fixtures": [
+    {
+      "component_id": "material_mystery_box",
+      "label": "材料盲盒",
+      "student_problem": "学生对材料只停留在名称层面，不知道纸材、墨色、工具触感会怎样影响作品效果。",
+      "why_use": "真实材料探摸和试验能把材料特性变成身体经验，适合引出材料决定效果的判断。",
+      "media_need": "3-5 种安全纸材或替代材料，实物材料优先。",
+      "evidence_output": "试印小样 + 材料效果记录",
+      "screen_prompt": "材料盲盒：摸特点，试效果。",
+      "teacher_language": "先让材料自己说话，摸一摸、试一试，再说出你的发现。",
+      "learning_sheet": "材料 / 触感 / 试印效果 / 适合表现"
+    },
+    {
+      "component_id": "technique_step_demo",
+      "label": "技法拆解",
+      "student_problem": "学生知道要做什么，但关键步骤、手势、顺序和常见错误不清楚。",
+      "why_use": "把教师示范切成可观察、可模仿、可检查的步骤，降低操作负担。",
+      "media_need": "步骤图、实物投影或短视频，展示 3-5 个关键步骤。",
+      "evidence_output": "步骤核对或错误修正",
+      "screen_prompt": "技法拆解：看步骤，试一次。",
+      "teacher_language": "今天只拆一个关键动作，看清工具方向、力度和揭起时机。",
+      "learning_sheet": "步骤 / 我看清的动作 / 我试了一次"
+    },
+    {
+      "component_id": "learning_sheet_record",
+      "label": "学习单记录",
+      "student_problem": "课堂过程发生了，但课后看不到学生怎样观察、试验、选择和修正。",
+      "why_use": "把短时活动沉淀为可追踪证据，保存学习过程而不是只填空。",
+      "media_need": "一张极简试印记录单，可纸质或大屏抄写。",
+      "evidence_output": "材料与印痕记录栏",
+      "screen_prompt": "学习单记录：试一次，圈一处，写一句理由。",
+      "teacher_language": "只记关键的一次，不多写；记录要帮你后面选择材料。",
+      "learning_sheet": "我用的纸 / 第几次 / 印痕特点 / 原因"
+    }
+  ],
+  "quick_component_subset": [
+    "technique_step_demo",
+    "learning_sheet_record"
+  ],
+  "guards": {
+    "daily_component_count": 3,
+    "quick_component_count": 2,
+    "no_global_component_shelf": true,
+    "no_chat_composer": true,
+    "local_note_current_section_only": true,
+    "selected_component_only_binding": true,
+    "source_risk_readonly_hint_only": true
+  }
+}

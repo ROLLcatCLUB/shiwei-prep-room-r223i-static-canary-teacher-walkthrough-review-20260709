@@ -1,0 +1,30 @@
+﻿{
+    "repository":  "ROLLcatCLUB/shiwei-prep-room-r223i-static-canary-teacher-walkthrough-review-20260709",
+    "stage_id":  "1013R_R223I_STATIC_CANARY_TEACHER_WALKTHROUGH_OR_HOLD",
+    "status":  "PASS_LOCAL_STATIC_CANARY_TEACHER_WALKTHROUGH",
+    "decision":  "PASS_CONTINUE_TO_R223J_CARRIER_FIT_CHECK",
+    "validator":  {
+                      "passed":  true,
+                      "checks":  64,
+                      "failed":  0
+                  },
+    "zip":  {
+                "file":  "review_packages/1013R_R223I_STATIC_CANARY_TEACHER_WALKTHROUGH_OR_HOLD_REVIEW.zip",
+                "sha256":  "04EA657958C19E9721A0077755760B3B3427A58475AAA189327651175A50E329",
+                "entry_count":  18,
+                "backslash_entries":  false
+            },
+    "boundary":  {
+                     "formal_ui":  false,
+                     "r97b_modified":  false,
+                     "r97b_formal_route":  false,
+                     "frontend_backend_modified":  false,
+                     "runtime_enabled":  false,
+                     "provider_model_prompt_db":  false,
+                     "database_enabled":  false,
+                     "lesson_body_writeback":  false,
+                     "real_component_execution":  false,
+                     "formal_apply":  false,
+                     "r224_started":  false
+                 }
+}

@@ -1,0 +1,123 @@
+{
+  "stage_id": "1013R_R223I_STATIC_CANARY_TEACHER_WALKTHROUGH_OR_HOLD",
+  "created_at": "2026-07-08T20:23:17.422200+00:00",
+  "status": "PASS_LOCAL_STATIC_CANARY_TEACHER_WALKTHROUGH",
+  "decision": "PASS_CONTINUE_TO_R223J_CARRIER_FIT_CHECK",
+  "allowed_decisions": [
+    "PASS_CONTINUE_TO_R223J_CARRIER_FIT_CHECK",
+    "HOLD_FOR_R223H_P1_DENSITY_OR_INTERACTION_REDUCTION",
+    "STOP_FORMAL_UI_NOT_READY"
+  ],
+  "boundary": {
+    "formal_ui": false,
+    "r97b_modified": false,
+    "r97b_formal_route": false,
+    "frontend_backend_modified": false,
+    "runtime_enabled": false,
+    "provider_model_prompt_db": false,
+    "database_enabled": false,
+    "lesson_body_writeback": false,
+    "real_component_execution": false,
+    "formal_apply": false,
+    "r224_started": false
+  },
+  "validator": "validate_1013R_R223I_static_canary_teacher_walkthrough.py",
+  "validator_result": "validate_1013R_R223I_static_canary_teacher_walkthrough_result.json",
+  "recommended_review_order": [
+    "R223I_teacher_walkthrough_script.md",
+    "R223I_static_canary_review_checklist.md",
+    "R223I_teacher_readability_review.md",
+    "R223I_component_suggestion_friction_review.md",
+    "R223I_local_note_non_chat_review.md",
+    "R223I_continue_or_hold_decision.md",
+    "R223I_report.md"
+  ],
+  "file_count": 18,
+  "files": [
+    {
+      "path": "_REFERENCE_INPUTS/R223H/R223H_fixture_state.json",
+      "bytes": 7302,
+      "sha256": "84479191C0CBDD0078611BE4AF467B32E0DFD738798E99346F714147968E4673"
+    },
+    {
+      "path": "_REFERENCE_INPUTS/R223H/R223H_guard_compliance_check.md",
+      "bytes": 1933,
+      "sha256": "0FA1EA6E8A1468EF8B7098A82A24E2E242EB721B98328BB71929DAEC755C6A6E"
+    },
+    {
+      "path": "_REFERENCE_INPUTS/R223H/R223H_report.md",
+      "bytes": 1554,
+      "sha256": "7A1DF8D5764BD665080D99197307653FA70188EBAC4CD6907B0A4BD8FAC2A164"
+    },
+    {
+      "path": "_REFERENCE_INPUTS/R223H/R223H_screenshot_smoke_result.json",
+      "bytes": 1772,
+      "sha256": "7DCF9CDAB498BEF13B8B072C0839D21766BF5BEF927EA42CA974ED4630F0E49C"
+    },
+    {
+      "path": "_REFERENCE_INPUTS/R223H/R223H_screenshot_smoke_result.md",
+      "bytes": 1888,
+      "sha256": "2FFA376C39E96D122548A4D758335A284047F52EC3134A953ECA5E88C9809D3E"
+    },
+    {
+      "path": "_REFERENCE_INPUTS/R223H/R223H_static_canary_prototype.html",
+      "bytes": 20135,
+      "sha256": "8437A6688CEF090E972E645D1653E480CDBE7F7B850FAE648F468654533492AC"
+    },
+    {
+      "path": "_REFERENCE_INPUTS/R223H/validate_1013R_R223H_fixture_only_static_canary_result.json",
+      "bytes": 85,
+      "sha256": "499617ACB684F5F339F72375D979E7CF8DD75B592E117D755E67CD322710F853"
+    },
+    {
+      "path": "R223I_component_suggestion_friction_review.md",
+      "bytes": 1607,
+      "sha256": "A7EB4E58C037508AB856F46B997CC236ABEC7CA069614AAC2A9C4824E8E1C188"
+    },
+    {
+      "path": "R223I_continue_or_hold_decision.md",
+      "bytes": 1927,
+      "sha256": "001E689BDA473BC674A34860CF5BE8C50B5D29FF456D42498085A4BC9D80749D"
+    },
+    {
+      "path": "R223I_local_note_non_chat_review.md",
+      "bytes": 1032,
+      "sha256": "9C85888A083EEC4C61ACF40392A177C5960B91A892FAB2D0B4E76F30D7315D46"
+    },
+    {
+      "path": "R223I_report.md",
+      "bytes": 1618,
+      "sha256": "553B5703E4420B8A065776D8C4BA7E83FE1677D5280CEF8FC61DBF07607E5EF2"
+    },
+    {
+      "path": "R223I_static_canary_review_checklist.md",
+      "bytes": 2003,
+      "sha256": "90EA885E5EAE5870A6149A55E8765A8F4877AAF84DE6E3297A5D8326280232AE"
+    },
+    {
+      "path": "R223I_teacher_readability_review.md",
+      "bytes": 1635,
+      "sha256": "3D8BE455BA802BBA814A21C5D2DB92BEB48A27ACCF0B9584772D6B24AD295616"
+    },
+    {
+      "path": "R223I_teacher_walkthrough_script.md",
+      "bytes": 2394,
+      "sha256": "67D16C50C6FB8DCC72BA4F8291C14E5D5A54CC8821DA28FF863274803839356B"
+    },
+    {
+      "path": "README_FOR_GPT_REVIEW.md",
+      "bytes": 938,
+      "sha256": "B99C9268D1BDCB0A98C7FBCC9EDEED76C9C2564B14A2030707B4FBCBF23EBB26"
+    },
+    {
+      "path": "validate_1013R_R223I_static_canary_teacher_walkthrough.py",
+      "bytes": 5566,
+      "sha256": "1C840BBF5C20EA259CB653F54AD776EC343851488C05E07926D879F00EF03ED5"
+    },
+    {
+      "path": "validate_1013R_R223I_static_canary_teacher_walkthrough_result.json",
+      "bytes": 143,
+      "sha256": "293B27ABDC72A8944ECEE5DFEFCADE26A35049FA7D66D4D1552456DC1D1C6C29"
+    }
+  ]
+}

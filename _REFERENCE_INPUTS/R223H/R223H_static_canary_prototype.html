@@ -1,0 +1,544 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>R223H Fixture Only Static Canary</title>
+  <style>
+    :root {
+      --ink: #1e312d;
+      --muted: #66736f;
+      --line: #d9e3df;
+      --paper: #fffdf8;
+      --soft: #f5f8f7;
+      --accent: #2f7f70;
+      --accent-dark: #1e675a;
+      --warn: #b86422;
+      --blue: #416f9f;
+      --shadow: 0 12px 28px rgba(33, 52, 47, .08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+      color: var(--ink);
+      background: #edf3f0;
+      letter-spacing: 0;
+    }
+    button, input { font: inherit; }
+    .canary-shell {
+      min-height: 100vh;
+      padding: 14px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 10px;
+    }
+    .topbar {
+      min-height: 60px;
+      display: grid;
+      grid-template-columns: minmax(210px, 270px) 1fr auto;
+      gap: 14px;
+      align-items: center;
+      padding: 10px 14px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .96);
+      box-shadow: var(--shadow);
+    }
+    .brand { font-size: 18px; font-weight: 800; color: var(--accent); }
+    .subline { margin-top: 3px; font-size: 12px; color: var(--muted); }
+    .mode-switch {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+    }
+    .mode-btn {
+      min-width: 96px;
+      height: 34px;
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--muted);
+      cursor: pointer;
+    }
+    .mode-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      font-weight: 700;
+    }
+    .boundary-chip {
+      border: 1px solid var(--line);
+      background: var(--soft);
+      color: var(--muted);
+      padding: 7px 10px;
+      font-size: 12px;
+      white-space: nowrap;
+    }
+    .workbench {
+      display: grid;
+      grid-template-columns: 210px minmax(640px, 1fr) 260px;
+      grid-template-rows: minmax(540px, 1fr) auto;
+      gap: 10px;
+      min-height: 690px;
+    }
+    .panel {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .96);
+      box-shadow: var(--shadow);
+    }
+    .risk-rail {
+      padding: 12px;
+      overflow: hidden;
+    }
+    .panel-title {
+      margin: 0 0 10px;
+      font-size: 15px;
+      font-weight: 800;
+    }
+    .risk-card {
+      border-left: 4px solid var(--warn);
+      background: #fff6ed;
+      padding: 10px;
+      margin-bottom: 10px;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+    .fold-row {
+      height: 34px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .prep-canvas {
+      padding: 18px;
+      overflow: hidden;
+    }
+    .lesson-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+    .lesson-title {
+      font-size: 22px;
+      font-weight: 800;
+    }
+    .guard-text {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+    .focused-section {
+      border: 2px solid rgba(47, 127, 112, .34);
+      background: var(--paper);
+      padding: 16px;
+      min-height: 284px;
+    }
+    .section-title {
+      color: var(--accent);
+      font-size: 18px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+    .section-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .field {
+      min-height: 72px;
+      padding: 10px;
+      border: 1px solid #e6eee9;
+      background: #fff;
+    }
+    .field label {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      margin-bottom: 6px;
+    }
+    .field p {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .projection {
+      margin-top: 12px;
+      border: 1px solid var(--line);
+      background: #fff;
+      padding: 12px;
+    }
+    .projection h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+      color: var(--blue);
+    }
+    .rhythm {
+      display: grid;
+      grid-template-columns: 72px 88px 1fr;
+      gap: 6px;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+    .rhythm div {
+      padding: 5px 6px;
+      background: var(--soft);
+      border: 1px solid #e7efeb;
+    }
+    .quick-list {
+      margin: 0;
+      padding-left: 20px;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+    .binding-preview {
+      padding: 12px;
+      overflow: hidden;
+    }
+    .binding-box {
+      border: 1px solid var(--accent);
+      background: #fff;
+      padding: 12px;
+      min-height: 220px;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+    .binding-box strong { color: var(--accent); }
+    .component-strip {
+      grid-column: 1 / 4;
+      padding: 12px;
+      min-height: 138px;
+    }
+    .strip-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .component-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .component-card {
+      border: 1px solid var(--line);
+      background: #fff;
+      min-height: 100px;
+      padding: 10px;
+      text-align: left;
+      cursor: pointer;
+    }
+    .component-card.selected {
+      border-color: var(--accent);
+      box-shadow: inset 0 0 0 1px var(--accent);
+    }
+    .component-card h3 {
+      margin: 0 0 6px;
+      font-size: 14px;
+      color: var(--ink);
+    }
+    .component-card p {
+      margin: 0 0 6px;
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+    .actions {
+      display: flex;
+      gap: 6px;
+      margin-top: 7px;
+    }
+    .actions span {
+      border: 1px solid var(--line);
+      background: var(--soft);
+      color: var(--accent-dark);
+      padding: 3px 6px;
+      font-size: 11px;
+    }
+    .local-note {
+      height: 46px;
+      display: grid;
+      grid-template-columns: 1fr auto auto;
+      gap: 10px;
+      align-items: center;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .74);
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .local-note input {
+      height: 30px;
+      border: 1px solid #dce7e2;
+      background: #fff;
+      padding: 0 10px;
+      color: var(--ink);
+    }
+    .note-action {
+      border: 1px solid var(--line);
+      background: var(--soft);
+      color: var(--accent-dark);
+      height: 30px;
+      padding: 0 10px;
+      cursor: pointer;
+    }
+    .note-state { white-space: nowrap; }
+    .hidden { display: none; }
+    .smoke-markers { display: none; }
+    @media (max-width: 1120px) {
+      .topbar { grid-template-columns: 1fr; }
+      .mode-switch { justify-content: flex-start; flex-wrap: wrap; }
+      .workbench { grid-template-columns: minmax(220px, 1fr); }
+      .component-strip { grid-column: 1; }
+      .component-grid { grid-template-columns: minmax(0, 1fr); }
+      .binding-preview { display: none; }
+    }
+  </style>
+</head>
+<body
+  data-stage="R223H"
+  data-fixture-only="true"
+  data-independent-static-html="true"
+  data-r97b-modified="false"
+  data-frontend-backend-modified="false"
+  data-runtime-enabled="false"
+  data-provider-model-prompt-db="false"
+  data-lesson-body-writeback="false"
+  data-formal-apply="false"
+>
+  <main
+    class="canary-shell"
+    data-current-mode="daily"
+    data-required-slots="mode_switch_slot prep_canvas_slot focused_section_slot component_suggestion_slot local_note_slot"
+    data-guarded-slots="binding_preview_slot source_risk_slot quick_projection_slot"
+    data-default-open="prep_canvas focused_section current_component_suggestion_strip"
+    data-default-collapsed="ordinary_gaps non_selected_component_bindings full_reasoning_chain"
+  >
+    <header class="topbar" data-slot="prep_workbench.mode_switch_slot">
+      <div>
+        <div class="brand">师维智教 · R223H 静态 Canary</div>
+        <div class="subline">fixture-only · independent sandbox · no R97B · no runtime</div>
+      </div>
+      <nav class="mode-switch" aria-label="mode switch">
+        <button class="mode-btn" data-mode-button="precision" type="button">精备</button>
+        <button class="mode-btn active" data-mode-button="daily" type="button">日常</button>
+        <button class="mode-btn" data-mode-button="quick" type="button">快速</button>
+      </nav>
+      <div class="boundary-chip">CANARY: local memory only</div>
+    </header>
+
+    <section class="workbench" aria-label="fixture only canary workbench">
+      <aside class="panel risk-rail" data-slot="prep_workbench.source_risk_slot" data-policy="readonly_high_risk_hint_only">
+        <h2 class="panel-title">资料与风险</h2>
+        <div class="risk-card" data-high-risk-visible="true">高风险确认：未确认学校可用油墨、滚筒或替代材料；先按拓印 / 单色试印保底。</div>
+        <div class="fold-row"><span>普通资料缺口</span><strong>折叠</strong></div>
+        <div class="fold-row"><span>系统假设</span><strong>折叠</strong></div>
+        <div class="fold-row"><span>完整推理链</span><strong>折叠</strong></div>
+      </aside>
+
+      <section class="panel prep-canvas" data-slot="prep_workbench.prep_canvas_slot" data-primary-reading-object="true">
+        <div class="lesson-head">
+          <div>
+            <div class="lesson-title">有趣的纸印 · <span data-mode-label>日常备课</span></div>
+            <div class="guard-text">课型 guard：不能变成普通纸手工；必须保留纸材特性、印痕语言、关键印法或过程证据。</div>
+          </div>
+          <div class="guard-text">主画布优先；组件只服务当前聚焦环节</div>
+        </div>
+
+        <article class="focused-section" data-slot="prep_workbench.focused_section_slot" data-focused-section="材料与印痕探究">
+          <div class="section-title">聚焦环节：材料与印痕探究</div>
+          <div class="section-grid">
+            <div class="field"><label>教师动作</label><p>引导学生摸一摸不同纸材，再用同一方法试印，观察印痕差异。</p></div>
+            <div class="field"><label>学生动作</label><p>摸材料、试印一次，圈出最清楚或最有层次的印痕。</p></div>
+            <div class="field"><label>材料需求</label><p>不同纸材、拓印或滚印工具、颜料或油墨、试印纸、清洁材料。</p></div>
+            <div class="field"><label>证据底线</label><p>至少保留一条试印记录，能说出纸材、印法或印痕效果。</p></div>
+          </div>
+        </article>
+
+        <section class="projection" data-projection="daily">
+          <h3>日常模式：时间节奏与课堂组织</h3>
+          <div class="rhythm">
+            <div>4 分钟</div><div>摸纸材</div><div>两人一组比较厚薄、软硬、肌理</div>
+            <div>6 分钟</div><div>看示范</div><div>教师示范拓印；有条件时补滚印</div>
+            <div>10 分钟</div><div>试印记录</div><div>个人试印，小组互看印痕</div>
+            <div>14 分钟</div><div>完成纸印</div><div>个人制作，小组共享工具</div>
+            <div>4 分钟</div><div>展示说印痕</div><div>选 2-3 件说纸材和印法</div>
+          </div>
+        </section>
+
+        <section class="projection hidden" data-projection="quick" data-slot="prep_workbench.quick_projection_slot">
+          <h3>快速模式：3 分钟可读保底链</h3>
+          <ol class="quick-list">
+            <li>摸：比较纸材厚薄、软硬和肌理。</li>
+            <li>试：用一种方法试印并观察印痕。</li>
+            <li>做：选择纸材完成小幅纸印。</li>
+            <li>说：说出纸材、印法和效果。</li>
+            <li>清：按小组分工整理工具。</li>
+          </ol>
+        </section>
+
+        <section class="projection hidden" data-projection="precision">
+          <h3>精备模式：仍保持合同占位</h3>
+          <p class="guard-text">本 canary 不打开精备决策卡和完整推理链；这里只显示模式可达，不授权正式精备 UI。</p>
+        </section>
+      </section>
+
+      <aside class="panel binding-preview" data-slot="prep_workbench.binding_preview_slot" data-open-policy="selected_component_only">
+        <h2 class="panel-title">绑定预览</h2>
+        <div class="binding-box" data-selected-binding>
+          <strong data-binding-title>材料盲盒</strong>
+          <div>大屏：<span data-binding-screen>材料盲盒：摸特点，试效果。</span></div>
+          <div>学习单：<span data-binding-sheet>材料 / 触感 / 试印效果 / 适合表现</span></div>
+          <div>教师语言：<span data-binding-language>先让材料自己说话，摸一摸、试一试，再说出你的发现。</span></div>
+          <div>证据：<span data-binding-evidence>试印小样 + 材料效果记录</span></div>
+        </div>
+      </aside>
+
+      <section
+        class="panel component-strip"
+        data-slot="prep_workbench.component_suggestion_slot"
+        data-scope="current_focused_section_only"
+        data-max-components-daily="3"
+        data-max-components-quick="2"
+        data-not-global-shelf="true"
+      >
+        <div class="strip-head">
+          <span data-component-count-label>当前环节组件建议 · 3 / 3</span>
+          <span>不是全量组件货架；只服务“材料与印痕探究”</span>
+        </div>
+        <div class="component-grid" data-component-grid></div>
+      </section>
+    </section>
+
+    <footer class="local-note" data-slot="prep_workbench.local_note_slot" data-non-chat="true" data-scope="current_section_only" data-persistence="none">
+      <input data-local-note-input aria-label="local note" placeholder="补充本环节材料限制..." />
+      <button class="note-action" data-local-note-button type="button">添加局部说明</button>
+      <span class="note-state" data-local-note-state>未保存 · 仅本地内存</span>
+    </footer>
+
+    <script id="fixture-state" type="application/json">
+{
+  "components": [
+    {
+      "component_id": "material_mystery_box",
+      "label": "材料盲盒",
+      "student_problem": "学生对材料只停留在名称层面，不知道纸材、墨色、工具触感会怎样影响作品效果。",
+      "media_need": "3-5 种安全纸材或替代材料",
+      "evidence_output": "试印小样 + 材料效果记录",
+      "screen_prompt": "材料盲盒：摸特点，试效果。",
+      "teacher_language": "先让材料自己说话，摸一摸、试一试，再说出你的发现。",
+      "learning_sheet": "材料 / 触感 / 试印效果 / 适合表现"
+    },
+    {
+      "component_id": "technique_step_demo",
+      "label": "技法拆解",
+      "student_problem": "学生关键步骤、手势、顺序和常见错误不清楚。",
+      "media_need": "步骤图、实物投影或短视频",
+      "evidence_output": "步骤核对或错误修正",
+      "screen_prompt": "技法拆解：看步骤，试一次。",
+      "teacher_language": "今天只拆一个关键动作，看清工具方向、力度和揭起时机。",
+      "learning_sheet": "步骤 / 我看清的动作 / 我试了一次"
+    },
+    {
+      "component_id": "learning_sheet_record",
+      "label": "学习单记录",
+      "student_problem": "课后看不到学生怎样观察、试验、选择和修正。",
+      "media_need": "一张极简试印记录单",
+      "evidence_output": "材料与印痕记录栏",
+      "screen_prompt": "学习单记录：试一次，圈一处，写一句理由。",
+      "teacher_language": "只记关键的一次，不多写；记录要帮你后面选择材料。",
+      "learning_sheet": "我用的纸 / 第几次 / 印痕特点 / 原因"
+    }
+  ],
+  "quick_component_subset": ["technique_step_demo", "learning_sheet_record"]
+}
+    </script>
+    <script>
+      const fixture = JSON.parse(document.getElementById('fixture-state').textContent);
+      const shell = document.querySelector('.canary-shell');
+      const grid = document.querySelector('[data-component-grid]');
+      const countLabel = document.querySelector('[data-component-count-label]');
+      const modeLabel = document.querySelector('[data-mode-label]');
+      let selectedComponentId = 'material_mystery_box';
+
+      function visibleComponents(mode) {
+        if (mode === 'quick') {
+          return fixture.components.filter(item => fixture.quick_component_subset.includes(item.component_id));
+        }
+        return fixture.components;
+      }
+
+      function updateBinding(component) {
+        document.querySelector('[data-binding-title]').textContent = component.label;
+        document.querySelector('[data-binding-screen]').textContent = component.screen_prompt;
+        document.querySelector('[data-binding-sheet]').textContent = component.learning_sheet;
+        document.querySelector('[data-binding-language]').textContent = component.teacher_language;
+        document.querySelector('[data-binding-evidence]').textContent = component.evidence_output;
+        document.querySelector('[data-selected-binding]').dataset.selectedComponent = component.component_id;
+      }
+
+      function renderComponents(mode) {
+        const items = visibleComponents(mode);
+        if (!items.some(item => item.component_id === selectedComponentId)) {
+          selectedComponentId = items[0].component_id;
+        }
+        grid.innerHTML = '';
+        items.forEach(item => {
+          const card = document.createElement('button');
+          card.type = 'button';
+          card.className = 'component-card' + (item.component_id === selectedComponentId ? ' selected' : '');
+          card.dataset.componentId = item.component_id;
+          card.innerHTML = `<h3>${item.label}</h3><p>问题：${item.student_problem}</p><p>证据：${item.evidence_output}</p><div class="actions"><span>确认</span><span>替换</span><span>删除</span></div>`;
+          card.addEventListener('click', () => {
+            selectedComponentId = item.component_id;
+            renderComponents(shell.dataset.currentMode);
+          });
+          grid.appendChild(card);
+        });
+        const selected = items.find(item => item.component_id === selectedComponentId) || items[0];
+        updateBinding(selected);
+        countLabel.textContent = mode === 'quick'
+          ? `当前环节组件建议 · ${items.length} / 2`
+          : `当前环节组件建议 · ${items.length} / 3`;
+      }
+
+      function setMode(mode) {
+        shell.dataset.currentMode = mode;
+        document.querySelectorAll('[data-mode-button]').forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.modeButton === mode);
+        });
+        document.querySelectorAll('[data-projection]').forEach(panel => {
+          panel.classList.toggle('hidden', panel.dataset.projection !== mode);
+        });
+        modeLabel.textContent = mode === 'quick' ? '快速备课' : mode === 'precision' ? '精备占位' : '日常备课';
+        renderComponents(mode);
+      }
+
+      document.querySelectorAll('[data-mode-button]').forEach(btn => {
+        btn.addEventListener('click', () => setMode(btn.dataset.modeButton));
+      });
+      document.querySelector('[data-local-note-button]').addEventListener('click', () => {
+        const input = document.querySelector('[data-local-note-input]');
+        const state = document.querySelector('[data-local-note-state]');
+        state.textContent = input.value.trim()
+          ? '已暂存到本页内存 · 不写回教案'
+          : '未保存 · 仅本地内存';
+      });
+      setMode('daily');
+    </script>
+
+    <div
+      class="smoke-markers"
+      data-no-global-component-shelf="true"
+      data-no-chat-composer="true"
+      data-no-r97b-route="true"
+      data-no-runtime="true"
+      data-no-writeback="true"
+    >R223H smoke markers</div>
+  </main>
+</body>
+</html>
